@@ -30,4 +30,4 @@ apliksi pencatatan spp sekolah
 
 # Author
 
-:rocket:[Muhammad Luthfi] (https://codevidn.github.io)
+:rocket: [Muhammad Luthfi](https://codevidn.github.io)
