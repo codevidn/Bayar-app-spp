@@ -11,7 +11,7 @@ class TransaksiController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * 
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -51,8 +51,14 @@ class TransaksiController extends Controller
     public function show($id)
     {
         $siswa = Siswa::findOrFail($id);
-        $transaksi = Pembayaran::where('id_siswa',$id);
-        return view('fitur.transaksi.profile', compact('siswa'));
+        $transaksi = Pembayaran::where('id_siswa', $id)->paginate(12);
+
+        $row = [
+            'siswa' => $siswa,
+            'transaksi' => $transaksi
+        ];
+        // dd($row);
+        return view('fitur.transaksi.profile', compact('row'));
     }
 
     /**
@@ -63,7 +69,7 @@ class TransaksiController extends Controller
      */
     public function edit($id)
     {
-        return view('fitur.transaksi.edit');
+        //
     }
 
     /**
@@ -73,9 +79,13 @@ class TransaksiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
-        //
+        $transaksi = Pembayaran::findOrFail($id);
+        $transaksi->status = "1";
+        $transaksi->save();
+        return redirect()->route('transaksi.show');
+
     }
 
     /**

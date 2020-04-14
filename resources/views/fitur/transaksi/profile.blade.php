@@ -4,7 +4,6 @@
 @section('js')
 <!-- proc_close -->
 <script src="{{ asset('js/pages/examples/profile.js')}}"></script>
-<script src="{{ asset('js/pages/ui/dialogs.js')}}"></script>
 <!-- Bootstrap Notify Plugin Js -->
 <script src="{{ asset('plugins/bootstrap-notify/bootstrap-notify.js')}}"></script>
 <!-- Waves Effect Plugin Js -->
@@ -16,26 +15,6 @@
 
 <script>
 function showCancelMessage1() {
-    swal({
-        title: "Apakah kamu serius?",
-        text: "Untuk melakukan transaksi ini !!",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#4CAF50",
-        confirmButtonText: "Yes, Bayar",
-        cancelButtonText: "No, Batal",
-        closeOnConfirm: false,
-        closeOnCancel: false
-    }, function (isConfirm) {
-        if (isConfirm) {
-            document.getElementById('1').submit();
-            swal("Transaksi Berhasil!", "Anda telah berhasil melakukan transaksi", "success");
-        } else {
-            swal("Transaksi Dibatalkan", "Anda telah membatalkan transaksi :)", "error");
-        }
-    });
-}
-function showCancelMessage2() {
     swal({
         title: "Apakah kamu serius?",
         text: "Untuk melakukan transaksi ini !!",
@@ -80,9 +59,9 @@ function showCancelMessage2() {
                     </div>
                     @method('PUT')
                     <div class="content-area">
-                        <h3>{{$siswa->nama}}</h3>
-                        <p>{{ $siswa->nis }}</p>
-                        <p>XII RPL 2</p>
+                        <h3>{{$row['siswa']['nama']}}</h3>
+                        <p>{{$row['siswa']['nis']}}</p>
+                        <p>Kelas</p>
                     </div>
                 </div>
             </div>
@@ -96,60 +75,21 @@ function showCancelMessage2() {
                 </div>
                 <div class="body">
                     <table class="table table-bordered table-striped table-hover dataTable">
+                    @foreach($row['transaksi'] as $data)
                         <tr>
-                            <td>aaaaaa</td>
+                            <td>{{ $data['bulan_dibayar'] }}</td>
                             <td style="width: 100px;">
-                                <button class="btn btn-primary waves-effect" onclick="showCancelMessage1()" data-type="cancel">Bayar</button>
-                                <form action="{{ route('transaksi.create')}}" id="1" method="post">
+                            @if( $data['status'] === '1')
+                            <a class="btn btn-success ">Lunas</a>
+                            @else
+                                <form action="{{ route('transaksi.edit',$data['id'] )}}" id="js{{ $data['id'] }}" method="get">
+                                <button class="btn btn-primary waves-effect" type="submit" onclick="return confirm('Apakah anda inin melakukan transaksi !!!')" data-type="cancel">Bayar</button>
                                     @csrf
                                 </form>
+                            @endif
                             </td>
                         </tr>
-                        <tr>
-                            <td>aaaaaa</td>
-                            <td style="width: 100px;">
-                                <button class="btn btn-primary waves-effect" onclick="showCancelMessage2()" data-type="cancel">Bayar</button>
-                                <form action="{{ route('transaksi.create')}}" id="1" method="post">
-                                    @csrf
-                                </form>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>aaaaaa</td>
-                            <td style="width: 100px;">
-                                <button class="btn btn-primary waves-effect" onclick="showCancelMessage1()" data-type="cancel">Bayar</button>
-                                <form action="{{ route('transaksi.create')}}" id="1" method="post">
-                                    @csrf
-                                </form>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>aaaaaa</td>
-                            <td style="width: 100px;">
-                                <button class="btn btn-primary waves-effect" onclick="showCancelMessage2()" data-type="cancel">Bayar</button>
-                                <form action="{{ route('transaksi.create')}}" id="1" method="post">
-                                    @csrf
-                                </form>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>aaaaaa</td>
-                            <td style="width: 100px;">
-                                <button class="btn btn-primary waves-effect" onclick="showCancelMessage1()" data-type="cancel">Bayar</button>
-                                <form action="{{ route('transaksi.create')}}" id="1" method="post">
-                                    @csrf
-                                </form>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>aaaaaa</td>
-                            <td style="width: 100px;">
-                                <button class="btn btn-primary waves-effect" onclick="showCancelMessage2()" data-type="cancel">Bayar</button>
-                                <form action="{{ route('transaksi.create')}}" id="1" method="post">
-                                    @csrf
-                                </form>
-                            </td>
-                        </tr>
+                        @endforeach
                     </table>
                 </div>
             </div>
