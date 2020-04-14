@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Siswa;
+use App\Pembayaran;
+
 
 class DashController extends Controller
 {
@@ -13,7 +17,15 @@ class DashController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $cuser = User::count();
+        $csiswa = Siswa::count();
+
+        $data = [
+            'user' => $cuser,
+            'siswa' => $csiswa,
+        ];
+
+        return view('dashboard')->with('data',$data);
     }
 
     /**

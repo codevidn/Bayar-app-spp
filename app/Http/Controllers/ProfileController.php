@@ -3,22 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Pembayaran;
-use App\Siswa;
 
-class TransaksiController extends Controller
+class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $cari = $request->get('cari');
-        $siswa = Siswa::where('nis', $cari)->paginate(1);
-        return view('fitur.transaksi.index', compact('siswa'));
+        //
     }
 
     /**
@@ -28,7 +23,7 @@ class TransaksiController extends Controller
      */
     public function create()
     {
-        return view('fitur.transaksi.create');
+        //
     }
 
     /**
@@ -50,15 +45,7 @@ class TransaksiController extends Controller
      */
     public function show($id)
     {
-        $siswa = Siswa::findOrFail($id);
-        $transaksi = Pembayaran::where('id_siswa', $id)->paginate(12);
-
-        $row = [
-            'siswa' => $siswa,
-            'transaksi' => $transaksi
-        ];
-        // dd($row);
-        return view('fitur.transaksi.profile', compact('row'));
+        //
     }
 
     /**
@@ -79,13 +66,9 @@ class TransaksiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update(Request $request, $id)
     {
-        $transaksi = Pembayaran::findOrFail($id);
-        $transaksi->status = "1";
-        $transaksi->save();
-        return redirect()->route('transaksi.show', $id);
-
+        //
     }
 
     /**
