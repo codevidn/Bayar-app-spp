@@ -28,7 +28,7 @@
 </script>
 @endsection
 <div class="container-fluid">
-    <!-- Exportable Table -->
+    <!-- Tabel Siswa -->
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
@@ -37,11 +37,12 @@
                         DATA SISWA
                     </h2>
                     <ul class="header-dropdown m-r--5">
-                        <li class="dropdown">
-                             <a href="{{ url('app/siswa')}}" class="btn btn-primary">
+                             <a href="{{ route('siswa.create')}}" class="btn text-white btn-success">
+                             <i class="fas fa-plus"></i>
+                            </a>
+                             <a href="{{ url('app/siswa')}}" class="btn text-white btn-primary">
                              <i class="fas fa-sync"></i>
                             </a>
-                        </li>
                     </ul>
                 </div>
 
@@ -87,6 +88,6 @@
             </div>
         </div>
     </div>
-    <!-- #END# Exportable Table -->
+    <!-- #END# Tabel Siswa -->
 </div>
 @endsection

@@ -7562,7 +7562,8 @@ fieldset[disabled] .form-control {
     white-space: nowrap;
     position: relative;
     border-bottom: 1px solid #e9e9e9;
-    background: url("../images/user-img-background.jpg") no-repeat no-repeat;
+    background: rgb(6, 100, 100);
+    /* background: url("../images/user-img-background.jpg") no-repeat no-repeat; */
     height: 135px; }
     .sidebar .user-info .image {
       margin-right: 12px;
