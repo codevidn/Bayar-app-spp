@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Siswa;
+use App\Pembayaran;
 
 class SiswaController extends Controller
 {
@@ -36,7 +37,30 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $siswa = new Siswa();
+        $siswa->nisn = $request->nisn;
+        $siswa->nis = $request->nis;
+        $siswa->nama = $request->nama;
+        $siswa->no_telp = $request->no_telp;
+        $siswa->alamat = $request->alamat;
+        $tgl = date("Y");
+        $data = [
+            ['id_siswa'=>'1','bulan_dibayar'=>'Juli','tahun_bayar'=>$tgl,'status'=>'0'],
+            ['id_siswa'=>'1','bulan_dibayar'=>'Agustus','tahun_bayar'=>$tgl,'status'=>'0'],
+            ['id_siswa'=>'1','bulan_dibayar'=>'September','tahun_bayar'=>$tgl,'status'=>'0'],
+            ['id_siswa'=>'1','bulan_dibayar'=>'Oktober','tahun_bayar'=>$tgl,'status'=>'0'],
+            ['id_siswa'=>'1','bulan_dibayar'=>'November','tahun_bayar'=>$tgl,'status'=>'0'],
+            ['id_siswa'=>'1','bulan_dibayar'=>'Desember','tahun_bayar'=>$tgl,'status'=>'0'],
+            ['id_siswa'=>'1','bulan_dibayar'=>'Januari','tahun_bayar'=>$tgl,'status'=>'0'],
+            ['id_siswa'=>'1','bulan_dibayar'=>'Februari','tahun_bayar'=>$tgl,'status'=>'0'],
+            ['id_siswa'=>'1','bulan_dibayar'=>'Maret','tahun_bayar'=>$tgl,'status'=>'0'],
+            ['id_siswa'=>'1','bulan_dibayar'=>'April','tahun_bayar'=>$tgl,'status'=>'0'],
+            ['id_siswa'=>'1','bulan_dibayar'=>'Mei','tahun_bayar'=>$tgl,'status'=>'0'],
+            ['id_siswa'=>'1','bulan_dibayar'=>'Juni','tahun_bayar'=>$tgl,'status'=>'0']
+        ];
+        Pembayaran::insert($data);        
+        $siswa->save();
+        return redirect()->route('siswa.index');
     }
 
     /**
