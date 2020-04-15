@@ -18,6 +18,7 @@ class CreateSiswasTable extends Migration
             $table->string('nisn',11)->unique();
             $table->string('nis', 11)->unique();
             $table->string('user_token', 40)->nullable();
+            $table->string('id_kelas', 11)->nullable();
             $table->string('nama', 40);
             $table->string('no_telp', 13);
             $table->text('alamat');

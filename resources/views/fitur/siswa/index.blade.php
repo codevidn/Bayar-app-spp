@@ -36,7 +36,7 @@
                     <h2>
                         DATA SISWA
                     </h2>
-                    <ul class="header-dropdown m-r--5">
+                    <ul class="header-dropdown m-r--5" style="color:#fff" >
                              <a href="{{ route('siswa.create')}}" class="btn text-white btn-success">
                              <i class="fas fa-plus"></i>
                             </a>
@@ -45,6 +45,11 @@
                             </a>
                     </ul>
                 </div>
+                    @if(session('success'))
+                        <div class="alert alert-success">
+                        {{ session('success') }}
+                        </div>
+                    @endif
 
                 @php
                     $i = 1
@@ -73,11 +78,15 @@
                                     <td>{{$data->alamat}}</td>
                                     <td>{{$data->no_telp}}</td>
                                     <td>
+                                        <form action="{{ route('siswa.destroy', $data->id) }}" method="POST">
                                         <div class="btn-group" role="group">
-                                            <a href="#" class="btn btn-info waves-effect"><i class="fa fa-info-circle"></i></a>
-                                            <a href="#" class="btn btn-warning waves-effect"><i class="fa fa-pencil-alt"></i></a>
-                                            <a href="#" class="btn btn-danger waves-effect"><i class="fa fa-trash"></i></a>
+                                            @csrf
+                                            @method('delete')
+                                            <a href="{{ route('siswa.show', $data->id) }}" class="btn btn-info waves-effect"><i class="fa fa-info-circle"></i></a>
+                                            <a href="{{ route('siswa.edit', $data->id) }}" class="btn btn-warning waves-effect"><i class="fa fa-pencil-alt"></i></a>
+                                            <button type="submit" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')"  class="btn btn-danger waves-effect"><i class="fa fa-trash"></i></button>
                                         </div>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach

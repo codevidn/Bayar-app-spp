@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Siswa;
 use App\Pembayaran;
+use Session;
 
 class SiswaController extends Controller
 {
@@ -37,29 +38,30 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
-        $siswa = new Siswa();
-        $siswa->nisn = $request->nisn;
-        $siswa->nis = $request->nis;
-        $siswa->nama = $request->nama;
-        $siswa->no_telp = $request->no_telp;
-        $siswa->alamat = $request->alamat;
+        $row = array(
+            'nisn' => $request->nisn,
+            'nis' => $request->nis,
+            'nama' => $request->nama,
+            'no_telp' => $request->no_telp,
+            'alamat' => $request->alamat,
+        );
+        $sid = Siswa::insertGetId($row);
         $tgl = date("Y");
         $data = [
-            ['id_siswa'=>'1','bulan_dibayar'=>'Juli','tahun_bayar'=>$tgl,'status'=>'0'],
-            ['id_siswa'=>'1','bulan_dibayar'=>'Agustus','tahun_bayar'=>$tgl,'status'=>'0'],
-            ['id_siswa'=>'1','bulan_dibayar'=>'September','tahun_bayar'=>$tgl,'status'=>'0'],
-            ['id_siswa'=>'1','bulan_dibayar'=>'Oktober','tahun_bayar'=>$tgl,'status'=>'0'],
-            ['id_siswa'=>'1','bulan_dibayar'=>'November','tahun_bayar'=>$tgl,'status'=>'0'],
-            ['id_siswa'=>'1','bulan_dibayar'=>'Desember','tahun_bayar'=>$tgl,'status'=>'0'],
-            ['id_siswa'=>'1','bulan_dibayar'=>'Januari','tahun_bayar'=>$tgl,'status'=>'0'],
-            ['id_siswa'=>'1','bulan_dibayar'=>'Februari','tahun_bayar'=>$tgl,'status'=>'0'],
-            ['id_siswa'=>'1','bulan_dibayar'=>'Maret','tahun_bayar'=>$tgl,'status'=>'0'],
-            ['id_siswa'=>'1','bulan_dibayar'=>'April','tahun_bayar'=>$tgl,'status'=>'0'],
-            ['id_siswa'=>'1','bulan_dibayar'=>'Mei','tahun_bayar'=>$tgl,'status'=>'0'],
-            ['id_siswa'=>'1','bulan_dibayar'=>'Juni','tahun_bayar'=>$tgl,'status'=>'0']
+            ['id_siswa'=>$sid,'bulan_dibayar'=>'Juli','tahun_bayar'=>$tgl,'status'=>'0'],
+            ['id_siswa'=>$sid,'bulan_dibayar'=>'Agustus','tahun_bayar'=>$tgl,'status'=>'0'],
+            ['id_siswa'=>$sid,'bulan_dibayar'=>'September','tahun_bayar'=>$tgl,'status'=>'0'],
+            ['id_siswa'=>$sid,'bulan_dibayar'=>'Oktober','tahun_bayar'=>$tgl,'status'=>'0'],
+            ['id_siswa'=>$sid,'bulan_dibayar'=>'November','tahun_bayar'=>$tgl,'status'=>'0'],
+            ['id_siswa'=>$sid,'bulan_dibayar'=>'Desember','tahun_bayar'=>$tgl,'status'=>'0'],
+            ['id_siswa'=>$sid,'bulan_dibayar'=>'Januari','tahun_bayar'=>$tgl,'status'=>'0'],
+            ['id_siswa'=>$sid,'bulan_dibayar'=>'Februari','tahun_bayar'=>$tgl,'status'=>'0'],
+            ['id_siswa'=>$sid,'bulan_dibayar'=>'Maret','tahun_bayar'=>$tgl,'status'=>'0'],
+            ['id_siswa'=>$sid,'bulan_dibayar'=>'April','tahun_bayar'=>$tgl,'status'=>'0'],
+            ['id_siswa'=>$sid,'bulan_dibayar'=>'Mei','tahun_bayar'=>$tgl,'status'=>'0'],
+            ['id_siswa'=>$sid,'bulan_dibayar'=>'Juni','tahun_bayar'=>$tgl,'status'=>'0']
         ];
         Pembayaran::insert($data);        
-        $siswa->save();
         return redirect()->route('siswa.index');
     }
 
@@ -71,7 +73,15 @@ class SiswaController extends Controller
      */
     public function show($id)
     {
-        //
+        $siswa = Siswa::findOrFail($id);
+        $transaksi = Pembayaran::where('id_siswa', $id)->paginate(12);
+
+        $row = [
+            'siswa' => $siswa,
+            'transaksi' => $transaksi
+        ];
+        // dd($row);
+        return view('fitur.transaksi.profile', compact('row'));
     }
 
     /**
@@ -82,7 +92,8 @@ class SiswaController extends Controller
      */
     public function edit($id)
     {
-        return view('fitur.siswa.edit');  
+        $siswa = Siswa::findOrFail($id);
+        return view('fitur.siswa.edit', compact('siswa'));  
     }
 
     /**
@@ -94,7 +105,15 @@ class SiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $siswa = Siswa::findOrFail($id);
+        $siswa->nisn = $request->nisn;
+        $siswa->nis = $request->nis;
+        $siswa->nama = $request->nama;
+        $siswa->no_telp = $request->no_telp;
+        $siswa->alamat = $request->alamat;
+        // dd($siswa);
+        $siswa->save();
+        return redirect()->route('siswa.index')->withSuccess(sprintf('Siswa Bernama %s Berhasil Di Ubah.', $siswa->nama));
     }
 
     /**
@@ -105,6 +124,7 @@ class SiswaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $siswa = Siswa::destroy($id);
+        return redirect()->route('siswa.index') ->withSuccess(sprintf('Data Berhasil Dihapus'));
     }
 }
