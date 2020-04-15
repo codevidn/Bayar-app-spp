@@ -14,11 +14,11 @@
                 </div>
                 <div class="content">
                     <div class="text">USER</div>
-                    <div class="number">15</div>
+                    <div class="number">{{$data['user']}}</div>
                 </div>
             </div>
         </div>
-        <!--  -->
+        <!--  --> 
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
             <div class="info-box hover-zoom-effect">
                 <div class="icon bg-light-green">
@@ -26,7 +26,7 @@
                 </div>
                 <div class="content">
                     <div class="text">KELAS</div>
-                    <div class="number">6</div>
+                    <div class="number">{{ $data['kelas']}}</div>
                 </div>
             </div>
         </div>
@@ -38,7 +38,7 @@
                 </div>
                 <div class="content">
                     <div class="text">PETUGAS</div>
-                    <div class="number">15</div>
+                    <div class="number">{{$data['petugas']}}</div>
                 </div>
             </div>
         </div>
@@ -50,7 +50,7 @@
                 </div>
                 <div class="content">
                     <div class="text">TRANSAKSI</div>
-                    <div class="number">12</div>
+                    <div class="number">{{$data['transaksi']}}</div>
                 </div>
             </div>
         </div>
@@ -64,19 +64,19 @@
                             <ul class="dashboard-stat-list">
                                 <li>
                                     TODAY
-                                    <span class="pull-right"><b>12</b> <small>USERS</small></span>
+                                    <span class="pull-right"><b>{{$data['transaksi']}}</b> <small>Transaksi</small></span>
                                 </li>
                                 <li>
                                     YESTERDAY
-                                    <span class="pull-right"><b>15</b> <small>USERS</small></span>
+                                    <span class="pull-right"><b>15</b> <small>Transaksi</small></span>
                                 </li>
                                 <li>
                                     LAST WEEK
-                                    <span class="pull-right"><b>90</b> <small>USERS</small></span>
+                                    <span class="pull-right"><b>90</b> <small>Transaksi</small></span>
                                 </li>
                                 <li>
                                     LAST MONTH
-                                    <span class="pull-right"><b>342</b> <small>USERS</small></span>
+                                    <span class="pull-right"><b>342</b> <small>Transaksi</small></span>
                                 </li>
                                 <li>
                                     LAST YEAR

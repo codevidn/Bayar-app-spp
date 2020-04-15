@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Kelasr;
 
 class KelasController extends Controller
 {
@@ -13,7 +14,8 @@ class KelasController extends Controller
      */
     public function index()
     {
-        return view('fitur.kelas.index');
+        $kelas = Kelasr::all();
+        return view('fitur.kelas.index', compact('kelas'));
     }
 
     /**

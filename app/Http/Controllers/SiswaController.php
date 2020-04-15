@@ -67,7 +67,7 @@ class SiswaController extends Controller
             'name' => $request->nama,
             'username' => $request->nis,
             'email' => $request->email,
-            'role' => 'siswa',
+            'role' => '3',
             'pin' => $sid,
             'password' => bcrypt($request->nis),
         ];

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Siswa;
+use App\Kelasr;
 use App\Pembayaran;
 
 
@@ -12,17 +13,32 @@ class DashController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     *2020-04-15 03:27:44
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         $cuser = User::count();
-        $csiswa = Siswa::count();
+        $cpetugas = User::where('role', '=', '1')->count();
+        $ckelas = Kelasr::count();
+
+        // date
+        $setToday = date("Y-m-d");
+        $yesterday = strtotime("yesterday");
+        $lastWeek = strtotime("LAST WEEK");
+        $lastMounth = strtotime("LAST MONTH");
+        $lastYear = strtotime("LAST YEAR");
+
+
+        $ctransaksi = Pembayaran::where('updated_at', '=', $setToday)->count();
+        $riwayat = 12;
 
         $data = [
             'user' => $cuser,
-            'siswa' => $csiswa,
+            'petugas' => $cpetugas,
+            'kelas' => $ckelas,
+            'transaksi' => $ctransaksi,
+            'riwayat' => $riwayat,
         ];
 
         return view('dashboard')->with('data',$data);

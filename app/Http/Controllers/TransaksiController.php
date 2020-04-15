@@ -58,7 +58,7 @@ class TransaksiController extends Controller
             'transaksi' => $transaksi
         ];
         // dd($row);
-        return view('fitur.transaksi.profile', compact('row'));
+        return view('fitur.transaksi.profile', compact('row')); 
     }
 
     /**
