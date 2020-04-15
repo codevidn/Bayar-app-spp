@@ -15,7 +15,7 @@ class KelasController extends Controller
     public function index()
     {
         $kelas = Kelasr::all();
-        return view('fitur.kelas.index', compact('kelas'));
+        return view('fitur.kelas.index', compact('kelas')); 
     }
 
     /**
@@ -25,7 +25,7 @@ class KelasController extends Controller
      */
     public function create()
     {
-        //
+        return view('fitur.kelas.create');
     }
 
     /**
@@ -36,7 +36,12 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = [
+            'nama_kelas' => $request->nama_kelas,
+            'kompetensi_keahlian' => $request->kompetensi_keahlian,
+        ];
+        Kelasr::insert($data);
+        return redirect()->route('kelas.index');
     }
 
     /**
@@ -58,7 +63,8 @@ class KelasController extends Controller
      */
     public function edit($id)
     {
-        //
+        $kelas = Kelasr::findOrFail($id);
+        return view('fitur.kelas.edit', compact('kelas'));
     }
 
     /**
@@ -70,7 +76,11 @@ class KelasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $kelas = Kelasr::findOrFail($id);
+        $kelas->nama_kelas = $request->nama_kelas;
+        $kelas->kompetensi_keahlian = $request->kompetensi_keahlian;
+        $kelas->save();
+        return redirect()->route('kelas.index')->withSuccess(sprintf('Data Berhasil Diubah'));
     }
 
     /**
@@ -81,6 +91,7 @@ class KelasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $kelas = Kelasr::destroy($id);
+        return redirect()->route('kelas.index')->withSuccess(sprintf('Data Berhasil Dihapus'));
     }
 }

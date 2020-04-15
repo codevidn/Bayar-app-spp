@@ -48,6 +48,7 @@
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary"> Simpan</button>
+                        <a name="" id="" class="btn btn-outline-secondary" href="{{route('siswa.index')}}" role="button">Kembali</a>
                     </div>
                 </form>
                 </div>

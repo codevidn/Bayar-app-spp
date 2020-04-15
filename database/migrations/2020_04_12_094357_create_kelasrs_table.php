@@ -15,7 +15,7 @@ class CreateKelasrsTable extends Migration
     {
         Schema::create('kelasrs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama_kelas', 10);
+            $table->string('nama_kelas', 10)->unique();
             $table->string('kompetensi_keahlian', 50);
             $table->timestamps();
         });

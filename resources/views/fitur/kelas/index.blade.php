@@ -34,17 +34,22 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        DATA SISWA
+                        DATA KELAS
                     </h2>
-                    <ul class="header-dropdown m-r--5">
-                        <li class="dropdown">
-                             <a href="{{ url('app/siswa')}}" class="btn btn-primary">
+                    <ul class="header-dropdown m-r--5" style="color:#fff" >
+                             <a href="{{ route('kelas.create')}}" class="btn text-white btn-success">
+                             <i class="fas fa-plus"></i>
+                            </a>
+                             <a href="{{ url('app/kelas')}}" class="btn text-white btn-primary">
                              <i class="fas fa-sync"></i>
                             </a>
-                        </li>
                     </ul>
                 </div>
-
+                    @if(session('success'))
+                        <div class="alert alert-success">
+                        {{ session('success') }}
+                        </div>
+                    @endif
                 @php
                     $i = 1
                 @endphp
@@ -60,19 +65,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
+                                @foreach($kelas as $data)
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{ $i++ }}</td>
+                                    <td>{{ $data->nama_kelas }}</td>
+                                    <td>{{ $data->kompetensi_keahlian }}</td>
                                     <td>
+                                    <form action="{{ route('kelas.destroy', $data->id) }}" method="POST">
                                         <div class="btn-group" role="group">
-                                            <a href="#" class="btn btn-info waves-effect"><i class="fa fa-info-circle"></i></a>
-                                            <a href="#" class="btn btn-warning waves-effect"><i class="fa fa-pencil-alt"></i></a>
-                                            <a href="#" class="btn btn-danger waves-effect"><i class="fa fa-trash"></i></a>
+                                            @csrf
+                                            @method('delete')
+                                            <a href="{{ route('kelas.edit', $data->id) }}" class="btn btn-warning waves-effect"><i class="fa fa-pencil-alt"></i></a>
+                                            <button type="submit" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')"  class="btn btn-danger waves-effect"><i class="fa fa-trash"></i></button>
                                         </div>
+                                        </form>
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
