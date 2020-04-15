@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Siswa;
 use App\Pembayaran;
 use Session;
+use App\User;
 
 class SiswaController extends Controller
 {
@@ -61,7 +62,16 @@ class SiswaController extends Controller
             ['id_siswa'=>$sid,'bulan_dibayar'=>'Mei','tahun_bayar'=>$tgl,'status'=>'0'],
             ['id_siswa'=>$sid,'bulan_dibayar'=>'Juni','tahun_bayar'=>$tgl,'status'=>'0']
         ];
-        Pembayaran::insert($data);        
+        Pembayaran::insert($data);  
+        $set = [
+            'name' => $request->nama,
+            'username' => $request->nis,
+            'email' => $request->email,
+            'role' => 'siswa',
+            'pin' => $sid,
+            'password' => bcrypt($request->nis),
+        ];
+        User::insert($set);    
         return redirect()->route('siswa.index');
     }
 

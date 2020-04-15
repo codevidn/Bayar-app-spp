@@ -24,17 +24,22 @@
                         </div>
                         <div class="form-group">
                             <div class="form-line">
-                                <input type="text" class="form-control" name="nisn" placeholder="NISN" />
+                                <input type="number" class="form-control" name="nisn" placeholder="NISN" />
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="form-line">
-                                <input type="text" class="form-control" name="nis" placeholder="NIS" />
+                                <input type="number" class="form-control" name="nis" placeholder="NIS" />
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="form-line">
-                                <input type="text" class="form-control" name="no_telp" placeholder="Nomor Telpon" />
+                                <input type="number" class="form-control" name="no_telp" placeholder="Nomor Telpon" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-line">
+                                <input type="email" class="form-control" name="email" placeholder="Alamat E-mail" />
                             </div>
                         </div>
                         <div class="form-group">
