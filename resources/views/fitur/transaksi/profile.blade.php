@@ -75,16 +75,25 @@ function showCancelMessage1() {
                 </div>
                 <div class="body">
                     <table class="table table-bordered table-striped table-hover dataTable">
+                    @if(session('success'))
+                        <div class="alert alert-success">
+                        {{ session('success') }}
+                        </div>
+                    @endif
                     @foreach($row['transaksi'] as $data)
                         <tr>
                             <td>{{ $data['bulan_dibayar'] }}</td>
                             <td style="width: 100px;">
                             @if( $data['status'] === '1')
-                            <a class="btn btn-success ">Lunas</a>
+                            <form action="{{ route('transaksi.batalkan',$data['id'] )}}" id="js{{ $data['id'] }}" method="post">
+                                @csrf
+                                <button class="btn btn-success waves-effect" type="submit" onclick="return confirm('Apakah anda ingin membatalkan Pelunasan SPP !!!')" data-type="cancel">Lunas</button>
+                                </form>
                             @else
-                                <form action="{{ route('transaksi.edit',$data['id'] )}}" id="js{{ $data['id'] }}" method="get">
-                                <button class="btn btn-primary waves-effect" type="submit" onclick="return confirm('Apakah anda inin melakukan transaksi !!!')" data-type="cancel">Bayar</button>
-                                    @csrf
+                                <form action="{{ route('transaksi.update',$data['id'] )}}" id="js{{ $data['id'] }}" method="post">
+                                @csrf
+                                @method('PUT')
+                                <button class="btn btn-primary waves-effect" type="submit" onclick="return confirm('Apakah anda ingin melakukan transaksi !!!')" data-type="cancel">Bayar</button>
                                 </form>
                             @endif
                             </td>

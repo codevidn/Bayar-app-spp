@@ -20,6 +20,8 @@ Route::group(['prefix' => 'app', 'middleware' => ['auth']], function () {
     Route::resource('/dashboard', 'DashController');
     Route::resource('/siswa', 'SiswaController');
     Route::resource('/kelas', 'KelasController');
+    Route::resource('/profile', 'ProfileController');
+    Route::post('transaksi/update/{id}','TransaksiController@batalkan')->name('transaksi.batalkan');
     Route::get('/cari', 'SearchController@search')->name('carisiswa');
 });
 

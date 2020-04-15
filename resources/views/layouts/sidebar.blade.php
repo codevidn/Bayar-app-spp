@@ -11,7 +11,7 @@
                     <div class="btn-group user-helper-dropdown">
                         <i class="fa fa-chevron-down" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></i>
                         <ul class="dropdown-menu pull-right">
-                        <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
+                        <li><a href="#"><i class="material-icons">person</i>Profile</a></li>
                             <li role="separator" class="divider"></li>
                             <li>
                                 <a href="{{ route('logout') }}" onclick="event.preventDefault();

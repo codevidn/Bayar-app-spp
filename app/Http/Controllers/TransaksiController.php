@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Pembayaran;
 use App\Siswa;
+use Redirect;
 
 class TransaksiController extends Controller
 {
@@ -37,7 +38,7 @@ class TransaksiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$id)
     {
         //
     }
@@ -69,7 +70,7 @@ class TransaksiController extends Controller
      */
     public function edit($id)
     {
-        //
+       //
     }
 
     /**
@@ -79,12 +80,12 @@ class TransaksiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update(Request $request,$id)
     {
         $transaksi = Pembayaran::findOrFail($id);
         $transaksi->status = "1";
         $transaksi->save();
-        return redirect()->route('transaksi.show', $id);
+        return Redirect::back()->withSuccess(sprintf('SPP Untuk Bulan %s Berhasil Dibayar.', $transaksi->bulan_dibayar));
 
     }
 
@@ -97,5 +98,13 @@ class TransaksiController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    public function batalkan($id)
+    {
+        $transaksi = Pembayaran::findOrFail($id);
+        $transaksi->status = "0";
+        $transaksi->save();
+        return Redirect::back()->withSuccess(sprintf('Pembayaran SPP Untuk Bulan %s Berhasil Dibatalkan !!! :).', $transaksi->bulan_dibayar));
     }
 }

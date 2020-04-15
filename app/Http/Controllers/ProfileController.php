@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Pembayaran;
+use App\Siswa;
 
 class ProfileController extends Controller
 {
@@ -11,9 +14,9 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($pin)
     {
-        //
+        print($pin);
     }
 
     /**
@@ -43,9 +46,9 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($pin)
     {
-        //
+        print($pin);
     }
 
     /**
