@@ -1,7 +1,9 @@
 # Bayar-app-spp
-apliksi pencatatan spp sekolah
 
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+<p align="center">
+    <img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400">
+    apliksi pencatatan spp sekolah
+</p>
 
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
@@ -59,9 +61,9 @@ You can now access the server at http://localhost:8000
 
 # Default  Admin Account
 
-Default Email :
+Default Username Or Email :
 
-    admin@mail.com 
+    admin1 or admin@mail.com 
 
 Password : 
 
