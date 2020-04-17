@@ -8,6 +8,7 @@ use App\Pembayaran;
 use App\Kelasr;
 use Session;
 use App\User;
+use App\Spp;
 
 class SiswaController extends Controller
 {
@@ -89,15 +90,18 @@ class SiswaController extends Controller
     {
         $siswa = Siswa::findOrFail($id);
         $transaksi = Pembayaran::where('id_siswa', $id)->paginate(12);
-        $kelas = Kelasr::where('id', $siswa->id_kelas)->get();
+        $kelas = Kelasr::where('id', $siswa->id_kelas)->get(); 
+        $tahun = date("Y");
+
+        $spp = Spp::where('tahun', $tahun)->get();
 
         $row = [
             'siswa' => $siswa,
             'transaksi' => $transaksi,
-            'kelas' => $kelas
+            'kelas' => $kelas,
+            'spp' => $spp
         ];
-        // dd($row);
-        return view('fitur.transaksi.profile', compact('row')); 
+        return view('fitur.transaksi.profile', compact('row'));
     }
 
     /**
@@ -149,6 +153,8 @@ class SiswaController extends Controller
     public function destroy($id)
     {
         $siswa = Siswa::destroy($id);
+        Pembayaran::where('id_siswa', $id)->delete();
+        User::where('pin', $id)->delete();
         return redirect()->route('siswa.index') ->withSuccess(sprintf('Data Berhasil Dihapus'));
     }
 }

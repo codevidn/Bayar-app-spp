@@ -106,17 +106,19 @@
                                 <tr>
                                     <th>No.</th>
                                     <th>Nama</th>
-                                    <th>BUlan Dibayar</th>
+                                    <th>Bulan Dibayar</th>
                                     <th>Tanggal Bayar</th>
                                 </tr>
                             </thead>
                             <tbody>
+                            @foreach($data['riwayat'] as $get)
                                 <tr>
-                                    <td>$i++</td>
-                                    <td>nama</td>
-                                    <td>bulan_dibayar</td>
-                                    <td>updated_at</td>
+                                    <td>{{ $i++ }}</td>
+                                    <td>{{$get->nama}}</td>
+                                    <td>{{$get->bulan_dibayar}}</td>
+                                    <td>{{ $get->updated_at }}</td>
                                 </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>

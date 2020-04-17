@@ -7,6 +7,7 @@ use App\User;
 use App\Siswa;
 use App\Kelasr;
 use App\Pembayaran; 
+Use Carbon\Carbon;
 use DB;
 
 
@@ -20,23 +21,14 @@ class DashController extends Controller
     public function index()
     {
         $cuser = User::count();
-        $cpetugas = User::where('role', '=', '1')->count();
+        $cpetugas = User::where('role', '=', '2')->count();
         $ckelas = Kelasr::count();
 
-        // date
-        $setToday = date("Y-m-d");
-        $yesterday = strtotime("yesterday");
-        $lastWeek = strtotime("LAST WEEK");
-        $lastMounth = strtotime("LAST MONTH");
-        $lastYear = strtotime("LAST YEAR");
-
-        $ctransaksi = Pembayaran::where('status', '=', 1)->count();
-        $riwayat = 12;
-        $rtransaksi = Pembayaran::where('status', '=', 1);
-        // $rsiswa = Siswa::where('id', '=', $getdata);
-        $siswa = Siswa::all();
-        // dd($ctransaksi);
-        
+        $ctransaksi = Pembayaran::whereDate('updated_at', Carbon::today())->count();
+        $riwayat = Pembayaran::join('siswas','siswas.id', '=','pembayarans.id_siswa')
+                                ->whereDate('pembayarans.updated_at', Carbon::today())
+                                ->get();
+        // dd($riwayat);
         $data = [
             'user' => $cuser,
             'petugas' => $cpetugas,
