@@ -34,8 +34,8 @@
                         </div>
                         <div class="form-group">
                             <div class="form-line">
-                                <select name="jk" value="{{ $data['siswa']['jk']}}"  class="form-control" id="">
-                                    <option value="">-- Pilih Jenis Kelamin --</option>
+                                <select name="jk" class="form-control" id="">
+                                    <option value="{{ $data['siswa']['jk']}}">{{ $data['siswa']['jk'] == 1 ? 'Laki-laki' : 'Perempuan' }}</option>
                                     <option value="1">Laki-laki</option>
                                     <option value="2">Perempuan</option>
                                 </select>
@@ -48,10 +48,12 @@
                         </div>
                         <div class="form-group">
                             <div class="form-line">
-                                <select name="id_kelas" value="{{ $data['siswa']['id_kelas']}}" class="form-control" id="">
-                                    <option value="">-- Please select --</option>
+                                <select name="id_kelas" class="form-control" id="">
+                                        <option value="{{ $data['siswa']['id_kelas']}}">{{ $data['siswa']['nama_kelas']}}</option>
                                     @foreach($data['kelas'] as $kel)
-                                    <option value="{{ $kel['id'] }}">{{ $kel['nama_kelas'] }}</option>
+                                        <option value="{{ $kel['id'] }}" >
+                                        {{ $kel['nama_kelas'] }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>

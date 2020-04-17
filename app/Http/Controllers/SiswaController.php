@@ -6,9 +6,10 @@ use Illuminate\Http\Request;
 use App\Siswa;
 use App\Pembayaran;
 use App\Kelasr;
-use Session;
 use App\User;
 use App\Spp;
+Use Carbon\Carbon;
+use Session;
 
 class SiswaController extends Controller
 {
@@ -75,6 +76,7 @@ class SiswaController extends Controller
             'role' => '3',
             'pin' => $sid,
             'password' => bcrypt($request->nis),
+            'created_at' => Carbon::now()
         ];
         User::insert($set);    
         return redirect()->route('siswa.index');
@@ -113,8 +115,8 @@ class SiswaController extends Controller
     public function edit($id)
     {
         $kelas = Kelasr::all();
-        $siswa = Siswa::findOrFail($id);
-
+        $siswa = Siswa::join('kelasrs','kelasrs.id', '=', 'siswas.id_kelas')
+                        ->findOrFail($id);
         $data = [
             'kelas' => $kelas,
             'siswa' => $siswa,

@@ -63,37 +63,78 @@
         <div class="col-xs-12 col-sm-9">
             <div class="card">
                 <div class="header">
-                    <h2>
-                    PENEMPATAN STRUK IURAN BULANAN
-                    </h2>
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#struk" aria-controls="home" role="tab" data-toggle="tab">Struk</a></li>
+                        <li role="presentation"><a href="#change_password_settings" aria-controls="settings" role="tab" data-toggle="tab">Change Password</a></li>
+                    </ul>
                 </div>
                 <div class="body">
-                    <table class="table table-bordered table-striped table-hover dataTable">
-                    @if(session('success'))
-                        <div class="alert alert-success">
-                        {{ session('success') }}
+                    <div>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade in active" id="struk">
+                                <h2>
+                                    PENEMPATAN STRUK IURAN BULANAN
+                                </h2>
+                                <table class="table table-bordered table-striped table-hover dataTable">
+                                @if(session('success'))
+                                    <div class="alert alert-success">
+                                    {{ session('success') }}
+                                    </div>
+                                @endif
+                                @foreach($row['transaksi'] as $data)
+                                    <tr>
+                                        <td>{{ $data['bulan_dibayar'] }}</td>
+                                        <td style="width: 100px;">
+                                        @if( $data['status'] === '1')
+                                            @csrf
+                                            <a class="btn btn-success waves-effect" type="submit" >Lunas</a>
+                                        @else
+                                            @csrf
+                                            @method('PUT')
+                                            <a class="btn btn-primary waves-effect" type="submit" >Bayar</a>
+                                        @endif
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </table>         
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade in" id="change_password_settings">
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <label for="OldPassword" class="col-sm-3 control-label">Old Password</label>
+                                        <div class="col-sm-9">
+                                            <div class="form-line">
+                                                <input type="password" class="form-control" id="OldPassword" name="OldPassword" placeholder="Old Password" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="NewPassword" class="col-sm-3 control-label">New Password</label>
+                                        <div class="col-sm-9">
+                                            <div class="form-line">
+                                                <input type="password" class="form-control" id="NewPassword" name="NewPassword" placeholder="New Password" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="NewPasswordConfirm" class="col-sm-3 control-label">New Password (Confirm)</label>
+                                        <div class="col-sm-9">
+                                            <div class="form-line">
+                                                <input type="password" class="form-control" id="NewPasswordConfirm" name="NewPasswordConfirm" placeholder="New Password (Confirm)" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-3 col-sm-9">
+                                            <button type="submit" class="btn btn-danger">SUBMIT</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                    @endif
-                    @foreach($row['transaksi'] as $data)
-                        <tr>
-                            <td>{{ $data['bulan_dibayar'] }}</td>
-                            <td style="width: 100px;">
-                            @if( $data['status'] === '1')
-                            <form action="{{ route('transaksi.batalkan',$data['id'] )}}" id="js{{ $data['id'] }}" method="post">
-                                @csrf
-                                <button class="btn btn-success waves-effect" type="submit" onclick="return confirm('Apakah anda ingin membatalkan Pelunasan SPP !!!')" data-type="cancel">Lunas</button>
-                                </form>
-                            @else
-                                <form action="{{ route('transaksi.update',$data['id'] )}}" id="js{{ $data['id'] }}" method="post">
-                                @csrf
-                                @method('PUT')
-                                <button class="btn btn-primary waves-effect" type="submit" onclick="return confirm('Apakah anda ingin melakukan transaksi !!!')" data-type="cancel">Bayar</button>
-                                </form>
-                            @endif
-                            </td>
-                        </tr>
-                        @endforeach
-                    </table>
+                    </div>
+                    
                 </div>
             </div>
         </div>

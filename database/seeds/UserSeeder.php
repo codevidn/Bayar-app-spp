@@ -41,6 +41,7 @@ class UserSeeder extends Seeder
                 'role' => '1',
                 'email' => 'admin@mail.com',
                 'password' => Hash::make('password'),
+                'created_at' => Carbon::now()
             ],
             [
                 'name' => 'Petugas Soleh',
@@ -48,6 +49,7 @@ class UserSeeder extends Seeder
                 'role' => '2',
                 'email' => Str::random(10).'@gmail.com',
                 'password' => Hash::make('password'),
+                'created_at' => Carbon::now()
             ],
         ];
         $role = [

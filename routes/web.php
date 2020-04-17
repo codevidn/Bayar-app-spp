@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index')->name('home');
-
+// Administrator Access #START#
 Route::group(['prefix' => 'app', 'middleware' => ['auth']], function () {
     Route::resource('/transaksi', 'TransaksiController');
     Route::resource('/dashboard', 'DashController');
@@ -32,6 +32,26 @@ Route::group(['prefix' => 'app', 'middleware' => ['auth']], function () {
     // Report #END#
 
 });
+// Administrator Access #END#
+
+// Officer Access #START#
+Route::group(['prefix' => 'app', 'middleware' => ['auth']], function () {
+    Route::resource('/transaksi', 'TransaksiController');
+    Route::resource('/dashboard', 'DashController');
+    Route::resource('/profile', 'ProfileController');
+
+    // Transaksi #START#
+    Route::post('transaksi/update/{id}','TransaksiController@batalkan')->name('transaksi.batalkan');
+    Route::get('/cari', 'SearchController@search')->name('carisiswa');
+    // Transaksi #END#
+
+    // Report #START#
+    Route::get('/report', 'ReportController@index')->name('report');
+    // Report #END#
+
+});
+// Officer Access #END#
+
 // Help #START#
 Route::group(['prefix' => 'help'], function () {
     Route::get('/', 'HelpController@index')->name('help');

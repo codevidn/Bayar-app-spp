@@ -11,8 +11,10 @@
                     <div class="btn-group user-helper-dropdown">
                         <i class="fa fa-chevron-down" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></i>
                         <ul class="dropdown-menu pull-right">
-                        <li><a href="#"><i class="material-icons">person</i>Profile</a></li>
+                        @if(Auth::user()->role === '3')
+                        <li><a href="{{ route('profile.index') }}"><i class="material-icons">person</i>Profile</a></li>
                             <li role="separator" class="divider"></li>
+                        @endif
                             <li>
                                 <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -37,6 +39,7 @@
                             <span>Home</span>
                         </a>
                     </li>
+                    @if(Auth::user()->role === '1' || Auth::user()->role === '2')
                     <li>
                         <a href="{{ url('/app/dashboard')}}">
                             <i class="material-icons">dashboard</i>
@@ -49,6 +52,7 @@
                             <span>Transaksi</span>
                         </a>
                     </li>
+                    @if(Auth::user()->role === '1')
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">assignment</i>
@@ -67,12 +71,14 @@
                             </li>
                         </ul>
                     </li>
+                    @endif
                     <li>
                         <a href="{{ route('report') }}">
                             <i class="material-icons">event</i>
                             <span>Report</span>
                         </a>
                     </li>
+                    @endif
                     <li>
                         <a href="{{ route('help')}}">
                             <i class="material-icons">error</i>

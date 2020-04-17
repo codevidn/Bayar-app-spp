@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Pembayaran;
 use App\Siswa;
+use App\Kelasr;
+use App\Spp;
+use Auth;
 
 class ProfileController extends Controller
 {
@@ -14,9 +17,23 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($pin)
+    public function index()
     {
-        print($pin);
+        $auth = Auth::user();
+        $siswa = Siswa::findOrFail($auth->pin);
+        $transaksi = Pembayaran::where('id_siswa', $auth->pin)->paginate(12);
+        $kelas = Kelasr::where('id', $siswa->id_kelas)->get(); 
+        $tahun = date("Y");
+        // dd($transaksi);
+        $spp = Spp::where('tahun', $tahun)->get();
+
+        $row = [
+            'siswa' => $siswa,
+            'transaksi' => $transaksi,
+            'kelas' => $kelas,
+            'spp' => $spp
+        ];
+        return view('fitur.profile.index',compact('row'));  
     }
 
     /**
@@ -46,9 +63,9 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($pin)
+    public function show($id)
     {
-        print($pin);
+        //
     }
 
     /**
