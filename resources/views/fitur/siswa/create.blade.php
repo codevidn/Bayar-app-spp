@@ -1,6 +1,10 @@
 @extends('layouts.main')
 
 @section('content')
+
+@section('js')
+
+@endsection
 <div class="container-fluid">
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -34,7 +38,26 @@
                         </div>
                         <div class="form-group">
                             <div class="form-line">
+                                <select name="jk"  class="form-control" id="">
+                                    <option value="">-- Pilih Jenis Kelamin --</option>
+                                    <option value="1">Laki-laki</option>
+                                    <option value="2">Perempuan</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-line">
                                 <input type="number" class="form-control" name="no_telp" placeholder="Nomor Telpon" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-line">
+                                <select name="id_kelas"  class="form-control" id="">
+                                    <option value="">-- Please select --</option>
+                                    @foreach($kelas as $kel)
+                                    <option value="{{ $kel->id }}">{{ $kel->nama_kelas }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">

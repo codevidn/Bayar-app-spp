@@ -3,7 +3,7 @@
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
-                    <img src="{{ asset('images/user.png')}}" width="48" height="48" alt="User" />
+                    <img src="{{ asset('images/64572.png')}}" width="48" height="48" alt="User" />
                 </div>
                 <div class="info-container">
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</div>
@@ -52,7 +52,7 @@
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">assignment</i>
-                            <span>Action</span>
+                            <span>Kelola Data</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
@@ -68,13 +68,13 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="{{ route('report') }}">
                             <i class="material-icons">event</i>
                             <span>Report</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="{{ route('help')}}">
                             <i class="material-icons">error</i>
                             <span>Help</span>
                         </a>
@@ -82,15 +82,5 @@
                 </ul>
             </div>
             <!-- #Menu -->
-            <!-- Footer -->
-            <!-- <div class="legal">
-                <div class="copyright">
-                    <a href="javascript:void(0);">BAYAR [APP FOR SPP]</a>.
-                </div>
-                <div class="version">
-                    <b>Version: </b> 1.0.0
-                </div>
-            </div> -->
-            <!-- #Footer -->
         </aside>
         <!-- #END# Left Sidebar -->

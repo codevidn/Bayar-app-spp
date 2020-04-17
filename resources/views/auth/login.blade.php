@@ -18,7 +18,7 @@
                             <i class="material-icons">person</i>
                         </span>
                         <div class="form-line">
-                            <input id="username" type="username" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+                            <input id="username" type="username" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" placeholder="Username or Email" required autocomplete="username" autofocus>
 
                             @error('username')
                                 <span class="invalid-feedback" role="alert">

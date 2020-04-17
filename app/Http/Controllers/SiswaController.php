@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Siswa;
 use App\Pembayaran;
+use App\Kelasr;
 use Session;
 use App\User;
 
@@ -28,7 +29,8 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        return view('fitur.siswa.create');   
+        $kelas = Kelasr::all();
+        return view('fitur.siswa.create', compact('kelas'));   
     }
 
     /**
@@ -43,6 +45,8 @@ class SiswaController extends Controller
             'nisn' => $request->nisn,
             'nis' => $request->nis,
             'nama' => $request->nama,
+            'jk' => $request->jk,
+            'id_kelas' => $request->id_kelas,
             'no_telp' => $request->no_telp,
             'alamat' => $request->alamat,
         );
@@ -85,13 +89,15 @@ class SiswaController extends Controller
     {
         $siswa = Siswa::findOrFail($id);
         $transaksi = Pembayaran::where('id_siswa', $id)->paginate(12);
+        $kelas = Kelasr::where('id', $siswa->id_kelas)->get();
 
         $row = [
             'siswa' => $siswa,
-            'transaksi' => $transaksi
+            'transaksi' => $transaksi,
+            'kelas' => $kelas
         ];
         // dd($row);
-        return view('fitur.transaksi.profile', compact('row'));
+        return view('fitur.transaksi.profile', compact('row')); 
     }
 
     /**
@@ -102,8 +108,14 @@ class SiswaController extends Controller
      */
     public function edit($id)
     {
+        $kelas = Kelasr::all();
         $siswa = Siswa::findOrFail($id);
-        return view('fitur.siswa.edit', compact('siswa'));  
+
+        $data = [
+            'kelas' => $kelas,
+            'siswa' => $siswa,
+        ];
+        return view('fitur.siswa.edit', compact('data'));  
     }
 
     /**
@@ -119,6 +131,8 @@ class SiswaController extends Controller
         $siswa->nisn = $request->nisn;
         $siswa->nis = $request->nis;
         $siswa->nama = $request->nama;
+        $siswa->jk = $request->jk;
+        $siswa->id_kelas = $request->id_kelas;
         $siswa->no_telp = $request->no_telp;
         $siswa->alamat = $request->alamat;
         // dd($siswa);

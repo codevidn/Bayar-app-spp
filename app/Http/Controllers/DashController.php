@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Siswa;
 use App\Kelasr;
-use App\Pembayaran;
+use App\Pembayaran; 
+use DB;
 
 
 class DashController extends Controller
@@ -29,10 +30,13 @@ class DashController extends Controller
         $lastMounth = strtotime("LAST MONTH");
         $lastYear = strtotime("LAST YEAR");
 
-
-        $ctransaksi = Pembayaran::where('updated_at', '=', $setToday)->count();
+        $ctransaksi = Pembayaran::where('status', '=', 1)->count();
         $riwayat = 12;
-
+        $rtransaksi = Pembayaran::where('status', '=', 1);
+        // $rsiswa = Siswa::where('id', '=', $getdata);
+        $siswa = Siswa::all();
+        // dd($ctransaksi);
+        
         $data = [
             'user' => $cuser,
             'petugas' => $cpetugas,

@@ -7886,20 +7886,18 @@ fieldset[disabled] .form-control {
 
 /* Profile Page ================================ */
 .profile-card .profile-header {
-  background-color: #ad1455;
+  background-color: #066464;
   padding: 42px 0; }
 
 .profile-card .profile-body .image-area {
   text-align: center;
   margin-top: -64px; }
   .profile-card .profile-body .image-area img {
-    border: 2px solid #ad1455;
+    background: #066464;
+    border: 4px solid #078345;
+    border-radius: 10px;
     padding: 2px;
-    margin: 2px;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    border-radius: 50%; }
+    margin: 2px; }
 
 .profile-card .profile-body .content-area {
   text-align: center;
@@ -7909,7 +7907,7 @@ fieldset[disabled] .form-control {
     margin-bottom: 0; }
     .profile-card .profile-body .content-area p:last-child {
       font-weight: 600;
-      color: #ad1455;
+      color: #066464;
       margin-top: 5px; }
 
 .profile-card .profile-footer {

@@ -2,7 +2,7 @@
 
 @section('content')
 
-@section('js')
+@section('js') 
 <!-- Jquery DataTable Plugin Js -->
     <script src="{{ asset('plugins/jquery-datatable/jquery.dataTables.js')}}"></script>
     <script src="{{ asset('plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js')}}"></script>

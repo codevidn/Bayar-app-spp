@@ -28,18 +28,20 @@
     <!-- JQuery DataTable Css -->
     <link href="{{ asset('plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css')}}" rel="stylesheet">
 
-
-    <!-- Morris Chart Css-->
-    <!-- <link href="{{ asset('plugins/morrisjs/morris.css')}}" rel="stylesheet" /> -->
-
     <!-- Custom Css -->
     <link href="{{ asset('css/style.css')}}" rel="stylesheet">
+
+    <!-- Wait Me Css -->
+    <link href="{{ asset('plugins/waitme/waitMe.css')}}" rel="stylesheet" />
+
+    <!-- Bootstrap Select Css -->
+    <link href="{{ asset('plugins/bootstrap-select/css/bootstrap-select.css')}}" rel="stylesheet" />
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('fontawesome-v5.6.3/css/all.css') }}">
 
     <!-- Base css -->
-    <link href="{{ asset('css/themes/all-themes.css')}}" rel="stylesheet" />
+    <link href="{{ asset('css/base.css')}}" rel="stylesheet" /> 
 
     <!-- get css -->
     @yield('css')

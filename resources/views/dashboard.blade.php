@@ -1,6 +1,32 @@
 @extends('layouts.main')
 
 @section('content')
+
+@section('js')
+<!-- Jquery DataTable Plugin Js -->
+    <script src="{{ asset('plugins/jquery-datatable/jquery.dataTables.js')}}"></script>
+    <script src="{{ asset('plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js')}}"></script>
+    <script src="{{ asset('plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js')}}"></script>
+    <script src="{{ asset('plugins/jquery-datatable/extensions/export/buttons.flash.min.js')}}"></script>
+    <script src="{{ asset('plugins/jquery-datatable/extensions/export/jszip.min.js')}}"></script>
+    <script src="{{ asset('plugins/jquery-datatable/extensions/export/pdfmake.min.js')}}"></script>
+    <script src="{{ asset('plugins/jquery-datatable/extensions/export/vfs_fonts.js')}}"></script>
+    <script src="{{ asset('plugins/jquery-datatable/extensions/export/buttons.html5.min.js')}}"></script>
+    <script src="{{ asset('plugins/jquery-datatable/extensions/export/buttons.print.min.js')}}"></script>
+<script>
+    $('.datatable').DataTable({
+        responsive: true
+    });
+
+    $('.dataTable').DataTable({
+        dom: 'Bfrtip',
+        responsive: true,
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    });
+</script>
+@endsection
 <div class="container-fluid">
     <div class="row clearfix">
         <div class="block-header">
@@ -55,43 +81,50 @@
             </div>
         </div>
     </div>
-    <!-- Answered Tickets -->
+    <!-- Tabel Transaksi Hari ini  -->
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="body bg-teal">
-                            <div class="font-bold m-b--35">RIWAYAT TRANSAKSI</div>
-                            <ul class="dashboard-stat-list">
-                                <li>
-                                    TODAY
-                                    <span class="pull-right"><b>{{$data['transaksi']}}</b> <small>Transaksi</small></span>
-                                </li>
-                                <li>
-                                    YESTERDAY
-                                    <span class="pull-right"><b>15</b> <small>Transaksi</small></span>
-                                </li>
-                                <li>
-                                    LAST WEEK
-                                    <span class="pull-right"><b>90</b> <small>Transaksi</small></span>
-                                </li>
-                                <li>
-                                    LAST MONTH
-                                    <span class="pull-right"><b>342</b> <small>Transaksi</small></span>
-                                </li>
-                                <li>
-                                    LAST YEAR
-                                    <span class="pull-right"><b>4 225</b> <small>USERS</small></span>
-                                </li>
-                                <li>
-                                    ALL
-                                    <span class="pull-right"><b>8 752</b> <small>USERS</small></span>
-                                </li>
-                            </ul>
+            <div class="card">
+                <div class="header">
+                    <h2>
+                        Daftar Transaksi Hari Ini
+                    </h2>
+                </div>
+                @if(session('success'))
+                        <div class="alert alert-success">
+                        {{ session('success') }}
                         </div>
+                    @endif
+
+                @php
+                    $i = 1
+                @endphp
+                <div class="table-responsive">
+                <div class="body">
+                        <table class="table table-bordered table-striped table-hover dataTable">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Nama</th>
+                                    <th>BUlan Dibayar</th>
+                                    <th>Tanggal Bayar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>$i++</td>
+                                    <td>nama</td>
+                                    <td>bulan_dibayar</td>
+                                    <td>updated_at</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+            </div>
         </div>
-                <!-- #END# Answered Tickets -->
+    </div>
+    <!-- #END# Answered  Tabel Transaksi Hari ini-->
 </div>
 
 @endsection

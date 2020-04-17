@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Pembayaran;
 use App\Siswa;
+use App\Kelasr;
 use Redirect;
+use App\Spp;
 
 class TransaksiController extends Controller
 {
@@ -53,13 +55,18 @@ class TransaksiController extends Controller
     {
         $siswa = Siswa::findOrFail($id);
         $transaksi = Pembayaran::where('id_siswa', $id)->paginate(12);
+        $kelas = Kelasr::where('id', $siswa->id_kelas)->get(); 
+        $tahun = date("Y");
+
+        $spp = Spp::where('tahun', $tahun)->get();
 
         $row = [
             'siswa' => $siswa,
-            'transaksi' => $transaksi
+            'transaksi' => $transaksi,
+            'kelas' => $kelas,
+            'spp' => $spp
         ];
-        // dd($row);
-        return view('fitur.transaksi.profile', compact('row')); 
+        return view('fitur.transaksi.profile', compact('row'));
     }
 
     /**

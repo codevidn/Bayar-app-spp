@@ -13,28 +13,6 @@
 <!-- Select Plugin Js -->
 <script src="{{ asset('plugins/bootstrap-select/js/bootstrap-select.js')}}"></script>
 
-<script>
-function showCancelMessage1() {
-    swal({
-        title: "Apakah kamu serius?",
-        text: "Untuk melakukan transaksi ini !!",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#4CAF50",
-        confirmButtonText: "Yes, Bayar",
-        cancelButtonText: "No, Batal",
-        closeOnConfirm: false,
-        closeOnCancel: false
-    }, function (isConfirm) {
-        if (isConfirm) {
-            document.getElementById('1').submit();
-            swal("Transaksi Berhasil!", "Anda telah berhasil melakukan transaksi", "success");
-        } else {
-            swal("Transaksi Dibatalkan", "Anda telah membatalkan transaksi :)", "error");
-        }
-    });
-}
-</script>
 <!-- pro -->
 @endsection
 @section('css')
@@ -52,17 +30,33 @@ function showCancelMessage1() {
     <div class="row clearfix">
         <div class="col-xs-12 col-sm-3">
             <div class="card profile-card">
-                <div class="profile-header">&nbsp;</div>
+                <div class="profile-header" style="background-color: rgb(6, 100, 100);">&nbsp;</div>
                 <div class="profile-body">
                     <div class="image-area">
-                        <img src="{{ asset('images/user.png')}}" style="width: 136px;" alt="Profile Image" />
+                        <img src="{{ asset('images/profile-s.png')}}" style="width: 136px;" alt="Profile Image" />
                     </div>
                     @method('PUT')
                     <div class="content-area">
                         <h3>{{$row['siswa']['nama']}}</h3>
                         <p>{{$row['siswa']['nis']}}</p>
-                        <p>Kelas</p>
+                        <p>{{$row['kelas']['0']['nama_kelas']}}</p>
                     </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="body">
+                    @foreach($row['spp'] as $get)
+                    <table>
+                        <tr>
+                            <td>Tahun &nbsp</td>
+                            <td>: {{ $get['tahun'] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Iuran Bulanan &nbsp</td>
+                            <td>: Rp. {{ $get['nominal'] }}.00;-</td>
+                        </tr>
+                    </table>
+                    @endforeach
                 </div>
             </div>
         </div>
