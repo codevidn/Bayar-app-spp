@@ -57,6 +57,16 @@ You can now access the server at http://localhost:8000
 
 - `.env` - Environment variables can be set in this file
 
+# Default  Admin Account
+
+Default Email :
+
+    admin@example.com 
+
+Password : 
+
+    password
+
 # Author
 
 :rocket: [Muhammad Luthfi](https://codevidn.github.io)
