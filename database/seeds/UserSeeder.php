@@ -4,9 +4,11 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+Use Carbon\Carbon;
 use App\User;
 use App\Role;
 use App\Kelasr;
+use App\Spp;
 
 class UserSeeder extends Seeder
 {
@@ -53,8 +55,13 @@ class UserSeeder extends Seeder
             ['name' => 'Petugas'],
             ['name' => 'Siswa']
         ];
+        $spp = [
+            'tahun' => Carbon::now()->format('Y'),
+            'nominal' => '300000',
+        ];
         Role::insert($role);
         User::insert($user);
         Kelasr::insert($kelas);
+        Spp::insert($spp);
     }
 }
