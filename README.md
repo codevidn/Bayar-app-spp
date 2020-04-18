@@ -71,7 +71,7 @@ Password :
 
 # Documentation Aplikasi
 
-    [Link Drive](https://drive.google.com/open?id=1XjAh0qnPP_7RTM4s-5jmSfcgXi3wdjRV)
+[Link Google Drive](https://drive.google.com/open?id=1XjAh0qnPP_7RTM4s-5jmSfcgXi3wdjRV)
 
 # Author
 
