@@ -33,7 +33,11 @@
                 <div class="profile-header" style="background-color: rgb(6, 100, 100);">&nbsp;</div>
                 <div class="profile-body">
                     <div class="image-area">
-                        <img src="{{ asset('images/profile-s.png')}}" style="width: 136px;" alt="Profile Image" />
+                    @if($row['siswa']['jk'] === '1')
+                        <img src="{{ asset('images/user-profile/male-user.jpg')}}" style="width: 136px;" alt="Profile Image" />
+                        @else
+                        <img src="{{ asset('images/user-profile/female-user.jpg')}}" style="width: 136px;" alt="Profile Image" />
+                    @endif
                     </div>
                     @method('PUT')
                     <div class="content-area">

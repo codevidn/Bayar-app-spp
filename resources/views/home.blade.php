@@ -5,7 +5,7 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
             <div class="header">
-                <h2>Welcome</h2>
+                <h2>Selamat Datang</h2>
             </div>
             <div class="body">
                     @if (session('status'))
@@ -14,7 +14,7 @@
                         </div>
                     @endif
                     Kamu berhasil masuk
-                <p class="lead">
+                <p>
                     Hallo User Selamat datang di <b>Bayar</b> aplikasi pencatatan Spp sekolah,
                     untuk bantuan tatacara penggunaan aplikasi ini anda bisa mengklik tombol Help pada sidenavigation.
                 </p>
