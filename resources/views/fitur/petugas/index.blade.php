@@ -2,7 +2,7 @@
 
 @section('content')
 
-@section('js') 
+@section('js')
 <!-- Jquery DataTable Plugin Js -->
     <script src="{{ asset('plugins/jquery-datatable/jquery.dataTables.js')}}"></script>
     <script src="{{ asset('plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js')}}"></script>
@@ -28,19 +28,19 @@
 </script>
 @endsection
 <div class="container-fluid">
-    <!-- Tabel Siswa -->
+    <!-- Exportable Table -->
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
                 <div class="header">
                     <h2>
-                        DATA SISWA
+                        DATA PETUGAS
                     </h2>
                     <ul class="header-dropdown m-r--5" style="color:#fff" >
-                             <a href="{{ route('siswa.create')}}" class="btn text-white btn-success">
+                             <a href="{{ route('petugas.create')}}" class="btn text-white btn-success">
                              <i class="fas fa-plus"></i>
                             </a>
-                             <a href="{{ route('siswa.index')}}" class="btn text-white btn-primary">
+                             <a href="{{ route('petugas.index')}}" class="btn text-white btn-primary">
                              <i class="fas fa-sync"></i>
                             </a>
                     </ul>
@@ -50,7 +50,6 @@
                         {{ session('success') }}
                         </div>
                     @endif
-
                 @php
                     $i = 1
                 @endphp
@@ -60,30 +59,25 @@
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>NISN</th>
-                                    <th>NIS</th>
-                                    <th>Nama Siswa</th>
-                                    <th>Alamat</th>
-                                    <th>No Telp</th>
+                                    <th>Nama</th>
+                                    <th>Nama Pengguna</th>
+                                    <th>Email</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($siswa as $data)
+                                @foreach($petugas as $data)
                                 <tr>
                                     <td>{{ $i++ }}</td>
-                                    <td>{{$data->nisn}}</td>
-                                    <td>{{$data->nis}}</td>
-                                    <td>{{$data->nama}}</td>
-                                    <td>{{$data->alamat}}</td>
-                                    <td>{{$data->no_telp}}</td>
+                                    <td>{{ $data->name}}</td>
+                                    <td>{{ $data->username }}</td>
+                                    <td>{{ $data->email }}</td>
                                     <td>
-                                        <form action="{{ route('siswa.destroy', $data->id) }}" method="POST">
+                                    <form action="{{ route('petugas.destroy', $data->id) }}" method="POST">
                                         <div class="btn-group" role="group">
                                             @csrf
                                             @method('delete')
-                                            <a href="{{ route('siswa.show', $data->id) }}" class="btn btn-info waves-effect"><i class="fa fa-info-circle"></i></a>
-                                            <a href="{{ route('siswa.edit', $data->id) }}" class="btn btn-warning waves-effect"><i class="fa fa-pencil-alt"></i></a>
+                                            <a href="{{ route('petugas.edit', $data->id) }}" class="btn btn-warning waves-effect"><i class="fa fa-pencil-alt"></i></a>
                                             <button type="submit" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')"  class="btn btn-danger waves-effect"><i class="fa fa-trash"></i></button>
                                         </div>
                                         </form>
@@ -97,6 +91,6 @@
             </div>
         </div>
     </div>
-    <!-- #END# Tabel Siswa -->
+    <!-- #END# Exportable Table -->
 </div>
 @endsection

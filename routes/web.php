@@ -15,11 +15,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index')->name('home');
 // Administrator Access #START#
-Route::group(['prefix' => 'app', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'app', 'middleware' => ['auth'],'middleware' => ['checkrole']], function () {
     Route::resource('/transaksi', 'TransaksiController');
     Route::resource('/dashboard', 'DashController');
     Route::resource('/siswa', 'SiswaController');
     Route::resource('/kelas', 'KelasController');
+    Route::resource('/petugas', 'PetugasController');
     Route::resource('/profile', 'ProfileController');
 
     // Transaksi #START#
@@ -35,20 +36,21 @@ Route::group(['prefix' => 'app', 'middleware' => ['auth']], function () {
 // Administrator Access #END#
 
 // Officer Access #START#
-Route::group(['prefix' => 'app', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'app', 'middleware' => ['auth'],'middleware' => ['petugas']], function () {
     Route::resource('/transaksi', 'TransaksiController');
     Route::resource('/dashboard', 'DashController');
-    Route::resource('/profile', 'ProfileController');
 
     // Transaksi #START#
     Route::post('transaksi/update/{id}','TransaksiController@batalkan')->name('transaksi.batalkan');
     Route::get('/cari', 'SearchController@search')->name('carisiswa');
     // Transaksi #END#
+});
+// Officer Access #END#
 
-    // Report #START#
-    Route::get('/report', 'ReportController@index')->name('report');
-    // Report #END#
-
+// Officer Access #START#
+Route::group(['prefix' => 'app', 'middleware' => ['auth'],'middleware' => ['siswa']], function () {
+    Route::resource('/profile', 'ProfileController');
+    Route::get('/home', 'HomeController@index')->name('home');
 });
 // Officer Access #END#
 

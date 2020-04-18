@@ -40,7 +40,7 @@
                              <a href="{{ route('kelas.create')}}" class="btn text-white btn-success">
                              <i class="fas fa-plus"></i>
                             </a>
-                             <a href="{{ url('app/kelas')}}" class="btn text-white btn-primary">
+                             <a href="{{ route('kelas.index')}}" class="btn text-white btn-primary">
                              <i class="fas fa-sync"></i>
                             </a>
                     </ul>

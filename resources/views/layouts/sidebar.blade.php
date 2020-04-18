@@ -60,6 +60,11 @@
                         </a>
                         <ul class="ml-menu">
                             <li>
+                                <a href="{{ route('petugas.index')}}">
+                                    <span>Data Petugas</span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{ route('siswa.index')}}">
                                     <span>Data Siswa</span>
                                 </a>
