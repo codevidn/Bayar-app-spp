@@ -22,11 +22,23 @@
 <link href="{{ asset('plugins/animate-css/animate.css')}}" rel="stylesheet" />
 <!-- Sweetalert Css -->
 <link href="{{ asset('plugins/sweetalert/sweetalert.css')}}" rel="stylesheet" />
+@endsection
 
-
+@section('js')
+ 
 @endsection
 
 <div class="container-fluid">
+@if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+ @endif
+ @if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+ @endif
     <div class="row clearfix">
         <div class="col-xs-12 col-sm-3">
             <div class="card profile-card">
@@ -46,6 +58,7 @@
                         <p>{{$row['kelas']['0']['nama_kelas']}}</p>
                     </div>
                 </div>
+
             </div>
             <div class="card">
                 <div class="body">
@@ -60,7 +73,7 @@
                             <td>: Rp. {{ $get['nominal'] }}.00;-</td>
                         </tr>
                     </table>
-                    @endforeach
+                @endforeach
                 </div>
             </div>
         </div>
@@ -75,17 +88,13 @@
                 <div class="body">
                     <div>
                         <div class="tab-content">
+                                
                             <div role="tabpanel" class="tab-pane fade in active" id="struk">
                                 <h2>
                                     PENEMPATAN STRUK IURAN BULANAN
                                 </h2>
                                 <table class="table table-bordered table-striped table-hover dataTable">
-                                @if(session('success'))
-                                    <div class="alert alert-success">
-                                    {{ session('success') }}
-                                    </div>
-                                @endif
-                                @foreach($row['transaksi'] as $data)
+                                    @foreach($row['transaksi'] as $data)
                                     <tr>
                                         <td>{{ $data['bulan_dibayar'] }}</td>
                                         <td style="width: 100px;">
@@ -103,28 +112,40 @@
                                 </table>         
                             </div>
                             <div role="tabpanel" class="tab-pane fade in" id="change_password_settings">
-                                <form class="form-horizontal">
-                                    <div class="form-group">
-                                        <label for="OldPassword" class="col-sm-3 control-label">Old Password</label>
+                                
+                                <form class="form-horizontal" method="POST" action="{{ route('profile.store') }}">
+                                {{ csrf_field() }}
+                                    <div class="form-group {{ $errors->has('current-password') ? ' has-error' : '' }}">
+                                        <label for="current-password" class="col-sm-3 control-label">Old Password</label>
                                         <div class="col-sm-9">
                                             <div class="form-line">
-                                                <input type="password" class="form-control" id="OldPassword" name="OldPassword" placeholder="Old Password" required>
+                                                <input type="password" class="form-control" id="current-password" name="current-password" placeholder="Old Password" required>
                                             </div>
+                                            @if ($errors->has('current-password'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('current-password') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="form-group {{ $errors->has('new-password') ? ' has-error' : '' }}">
+                                        <label for="new-password" class="col-sm-3 control-label">New Password</label>
+                                        <div class="col-sm-9">
+                                            <div class="form-line">
+                                                <input type="password" class="form-control" id="new-password" name="new-password" placeholder="New Password" required>
+                                            </div>
+                                            @if ($errors->has('new-password'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('new-password') }}</strong>
+                                                </span>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="NewPassword" class="col-sm-3 control-label">New Password</label>
+                                        <label for="new-password-confirm" class="col-sm-3 control-label">New Password (Confirm)</label>
                                         <div class="col-sm-9">
                                             <div class="form-line">
-                                                <input type="password" class="form-control" id="NewPassword" name="NewPassword" placeholder="New Password" required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="NewPasswordConfirm" class="col-sm-3 control-label">New Password (Confirm)</label>
-                                        <div class="col-sm-9">
-                                            <div class="form-line">
-                                                <input type="password" class="form-control" id="NewPasswordConfirm" name="NewPasswordConfirm" placeholder="New Password (Confirm)" required>
+                                                <input type="password" class="form-control" id="new-password-confirm" name="new-password_confirmation" placeholder="New Password (Confirm)" required>
                                             </div>
                                         </div>
                                     </div>
