@@ -76,13 +76,13 @@
                             </li>
                         </ul>
                     </li>
-                    @endif
                     <li>
                         <a href="{{ route('report') }}">
                             <i class="material-icons">event</i>
                             <span>Report</span>
                         </a>
                     </li>
+                    @endif
                     @endif
                     <li>
                         <a href="{{ route('help')}}">

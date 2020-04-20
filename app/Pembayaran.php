@@ -10,6 +10,6 @@ class Pembayaran extends Model
         'bulan_dibayar',
         'tahun_bayar',
         'id_siswa',
-        'updated_at',
+        'tgl_bayar',
     ];
 }

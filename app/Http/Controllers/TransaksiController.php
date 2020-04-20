@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+Use Carbon\Carbon;
 use App\Pembayaran;
 use App\Siswa;
 use App\Kelasr;
 use Redirect;
 use App\Spp;
+use Auth;
 
 class TransaksiController extends Controller
 {
@@ -91,6 +93,8 @@ class TransaksiController extends Controller
     {
         $transaksi = Pembayaran::findOrFail($id);
         $transaksi->status = "1";
+        $transaksi->tgl_bayar =  date('Y-m-d');
+        $transaksi->id_petugas = Auth::user()->id;
         $transaksi->save();
         return Redirect::back()->withSuccess(sprintf('SPP Untuk Bulan %s Berhasil Dibayar.', $transaksi->bulan_dibayar));
 

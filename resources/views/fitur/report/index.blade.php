@@ -51,7 +51,8 @@
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>Nama</th>
+                                    <th>Nama Siswa</th>
+                                    <th>Nama Petugas</th>
                                     <th>Bulan Dibayar</th>
                                     <th>Tanggal Bayar</th>
                                 </tr>
@@ -61,8 +62,9 @@
                                 <tr>
                                     <td>{{ $i++ }}</td>
                                     <td>{{$get->nama}}</td>
+                                    <td>{{$get->name}}</td>
                                     <td>{{$get->bulan_dibayar}}</td>
-                                    <td>{{ $get->updated_at }}</td>
+                                    <td>{{ $get->tgl_bayar }}</td>
                                 </tr>
                             @endforeach
                             </tbody>

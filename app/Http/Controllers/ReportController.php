@@ -13,7 +13,8 @@ class ReportController extends Controller
 {
     public function index()
     {
-        $transaksi = Pembayaran::join('siswas','siswas.id', '=','pembayarans.id_siswa')
+        $transaksi =  Pembayaran::join('siswas','siswas.id', '=','pembayarans.id_siswa')
+                                ->join('users','users.id','=','pembayarans.id_petugas')
                                 ->whereDate('pembayarans.updated_at', Carbon::today())
                                 ->get();
         $user = User::all();

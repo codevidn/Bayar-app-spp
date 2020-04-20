@@ -26,6 +26,7 @@ class DashController extends Controller
 
         $ctransaksi = Pembayaran::whereDate('updated_at', Carbon::today())->count();
         $riwayat = Pembayaran::join('siswas','siswas.id', '=','pembayarans.id_siswa')
+                                ->join('users','users.id','=','pembayarans.id_petugas')
                                 ->whereDate('pembayarans.updated_at', Carbon::today())
                                 ->get();
         // dd($riwayat);
